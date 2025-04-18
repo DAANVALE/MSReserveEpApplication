@@ -23,11 +23,15 @@ public class ClientService {
         this.clientRepo = clientRepo;
     }
 
-    public Page<ClientModel> getAllClients(Pageable pageable){
+    public Page<ClientModel> findAllByActive(Pageable pageable){
         return clientRepo.findByKilled((byte) 0, pageable);
     }
 
-    public Optional<ClientModel> getClientById(Integer id){
+    public Page<ClientModel> findAll(Pageable pageable){
+        return clientRepo.findAll(pageable);
+    }
+
+    public Optional<ClientModel> findById(Integer id){
         return clientRepo.findById(id);
     }
 
@@ -35,11 +39,11 @@ public class ClientService {
         return clientRepo.save(clientModel);
     }
 
-    public ClientModel killClient(Integer clientId){
+    public ClientModel deleteClient(Integer clientId){
 
         Optional<ClientModel> clientModel = clientRepo.findById(clientId);
 
-        ClientModel clientModelToKill = clientModel.get();
+        ClientModel clientModelToKill = clientModel.orElse(new ClientModel());
         clientModelToKill.setKilled((byte)1);
 
         if(clientModel.isPresent()){

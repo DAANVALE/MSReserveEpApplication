@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Set;
+
 @Entity
 @Table(name = "StateReserveType")
 @NoArgsConstructor
@@ -34,4 +36,8 @@ public class StateReserveType {
     public Integer getId() {
         return id;
     }
+
+    @OneToMany(mappedBy = "stateReserveType", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY) // Evita loops infinitos en JSON
+    private Set<ReserveModel> reserveModels;
 }

@@ -14,10 +14,7 @@ import java.util.Optional;
 
 @Repository
 public interface EventRepo extends JpaRepository<EventModel, Integer> {
-    Page<EventModel> findByKilled(Byte killed, Pageable pageable);
-
     Page<EventModel> findByClientModel(ClientModel clientModel, Pageable pageable);
     Page<EventModel> findByTerraceModel(TerraceModel terraceModel, Pageable pageable);
-
     Optional<EventModel> findById(Integer id);
 }

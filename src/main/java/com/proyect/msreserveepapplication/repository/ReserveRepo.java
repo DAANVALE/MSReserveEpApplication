@@ -13,11 +13,7 @@ import java.util.Optional;
 
 @Repository
 public interface ReserveRepo extends JpaRepository<ReserveModel, Integer> {
-    Page<ReserveModel> findByKilled(Byte killed, Pageable pageable);
-
     Page<ReserveModel> findByEventModel(EventModel event, Pageable pageable);
     Page<ReserveModel> findByServiceModel(ServiceModel service, Pageable pageable);
-
     Optional<ReserveModel> findById(Integer id);
-
 }

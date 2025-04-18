@@ -2,6 +2,7 @@ package com.proyect.msreserveepapplication.service;
 
 import com.proyect.msreserveepapplication.model.AsociateServiceModel;
 import com.proyect.msreserveepapplication.model.AsociateTerraceModel;
+import com.proyect.msreserveepapplication.repository.AsociateServiceRepo;
 import com.proyect.msreserveepapplication.repository.AsociateTerraceRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -16,17 +17,27 @@ public class AsociateTerraceService {
     
     @Autowired
     private final AsociateTerraceRepo asociateTerraceRepo;
+    @Autowired
+    private AsociateServiceRepo asociateServiceRepo;
 
     @Autowired
     public AsociateTerraceService(AsociateTerraceRepo asociateTerraceRepo) {
         this.asociateTerraceRepo = asociateTerraceRepo;
     }
 
-    public Page<AsociateTerraceModel> getAllAsociateTerraces(Pageable pageable){
+    public Page<AsociateTerraceModel> findAll(Pageable pageable){
+        return asociateTerraceRepo.findAll(pageable);
+    }
+
+    public Page<AsociateTerraceModel> findAllByActive(Pageable pageable){
         return asociateTerraceRepo.findByKilled((byte) 0, pageable);
     }
 
-    public Optional<AsociateTerraceModel> getAsociateTerraceById(Integer id){
+    public Optional<AsociateTerraceModel> findById(Integer id){
+        return asociateTerraceRepo.findById(id);
+    }
+
+    public Optional<AsociateTerraceModel> findAsociateTerraceById(Integer id){
         return asociateTerraceRepo.findById(id);
     }
 

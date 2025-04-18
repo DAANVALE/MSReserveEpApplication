@@ -13,5 +13,6 @@ import java.util.Optional;
 @Repository
 public interface StateEventTypeRepo extends JpaRepository<StateEventType, Integer> {
     Page<StateEventType> findByKilled(Byte killed, Pageable pageable);
+    Page<StateEventType> findAll(Pageable pageable);
     Optional<StateEventType> findById(Integer id);
 }

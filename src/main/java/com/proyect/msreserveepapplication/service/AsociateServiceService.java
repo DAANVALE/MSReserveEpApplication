@@ -21,11 +21,15 @@ public class AsociateServiceService {
         this.asociateServiceRepo = asociateServiceRepo;
     }
 
-    public Page<AsociateServiceModel> getAllAsociateServices(Pageable pageable){
+    public Page<AsociateServiceModel> findAllByActive(Pageable pageable){
         return asociateServiceRepo.findByKilled((byte) 0, pageable);
     }
 
-    public Optional<AsociateServiceModel> getAsociateServiceById(Integer id){
+    public Page<AsociateServiceModel> findAll(Pageable pageable){
+        return asociateServiceRepo.findAll(pageable);
+    }
+
+    public Optional<AsociateServiceModel> findById(Integer id){
         return asociateServiceRepo.findById(id);
     }
 

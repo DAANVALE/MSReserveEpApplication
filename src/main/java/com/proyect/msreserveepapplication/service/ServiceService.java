@@ -7,6 +7,7 @@ import com.proyect.msreserveepapplication.repository.ServiceRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -18,12 +19,11 @@ public class ServiceService {
     private final ServiceRepo serviceRepo;
 
     @Autowired
-    private final AsociateServiceRepo asociateServiceRepo;
+    private AsociateServiceRepo asociateServiceRepo;
 
     @Autowired
-    public ServiceService(ServiceRepo serviceService, AsociateServiceRepo asociateServiceRepo) {
+    public ServiceService(ServiceRepo serviceService) {
         this.serviceRepo = serviceService;
-        this.asociateServiceRepo = asociateServiceRepo;
     }
 
     public Page<ServiceModel> findAll(Pageable pageable) {
@@ -44,6 +44,25 @@ public class ServiceService {
     }
 
     public Page<ServiceModel> findByAsociate(AsociateServiceModel asociateServiceModel, Pageable pageable){
-        return serviceRepo.findByAsociate(asociateServiceModel, pageable);
+        return serviceRepo.findByAsociateService(asociateServiceModel, pageable);
+    }
+
+    public ServiceModel deleteService(Integer serviceId){
+
+        Optional<ServiceModel> serviceModel = serviceRepo.findById(serviceId);
+
+        ServiceModel serviceModelToKill = serviceModel.get();
+        serviceModelToKill.setKilled((byte)1);
+
+        if(serviceModel.isPresent()){
+            serviceRepo.save(serviceModelToKill);
+
+            // TODO: Delete and set Kill every else
+
+        }else{
+            throw new ResourceNotFoundException("Client not found with id " + serviceId);
+        }
+
+        return serviceModelToKill;
     }
 }

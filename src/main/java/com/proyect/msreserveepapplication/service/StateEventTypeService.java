@@ -1,6 +1,7 @@
 package com.proyect.msreserveepapplication.service;
 
 import com.proyect.msreserveepapplication.model.StateEventType;
+import com.proyect.msreserveepapplication.model.StateReserveType;
 import com.proyect.msreserveepapplication.repository.StateEventTypeRepo;
 import jdk.jfr.EventType;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,15 +22,19 @@ public class StateEventTypeService {
         this.stateEventTypeRepo = stateEventTypeRepo;
     }
 
-    public Page<StateEventType> getAllStateEventTypes(Pageable pageable){
+    public Page<StateEventType> findAll(Pageable pageable){
+        return stateEventTypeRepo.findAll(pageable);
+    }
+
+    public Page<StateEventType> findAllActive(Pageable pageable){
         return stateEventTypeRepo.findByKilled((byte) 0, pageable);
     }
 
-    public Optional<StateEventType> getStateEventTypeById(Integer id){
+    public Optional<StateEventType> findById(Integer id){
         return stateEventTypeRepo.findById(id);
     }
 
-    public StateEventType saveStateEventType(StateEventType stateEventTypeModel){
+    public StateEventType save(StateEventType stateEventTypeModel){
         return stateEventTypeRepo.save(stateEventTypeModel);
     }
 
@@ -39,12 +44,13 @@ public class StateEventTypeService {
     }
 
     // TODO: prov we dont gonna need it, in the controller could make the validations also!
-    public StateEventType setEventKilledById(Integer eventTypeId){
-        Optional<StateEventType> stateEventTypeModel = stateEventTypeRepo.findById(eventTypeId);
-        StateEventType eventTypeToKill = stateEventTypeModel.get();
+    public StateEventType deleteStateEventType(Integer eventTypeId){
+        Optional<StateEventType> eventTypeModel = stateEventTypeRepo.findById(eventTypeId);
 
-        eventTypeToKill.setKilled((byte)1);
-
-        return setEventKilled(eventTypeToKill);
+        if(eventTypeModel.isPresent()){
+            return setEventKilled(eventTypeModel.get());
+        }else{
+            throw new IllegalStateException("Event type not found");
+        }
     }
 }

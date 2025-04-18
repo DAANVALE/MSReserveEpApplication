@@ -50,7 +50,7 @@ public class ClientModel {
         return id;
     }
 
-    @OneToMany(mappedBy = "ClientModel", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "clientModel", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY) // Evita loops infinitos en JSON
     private Set<EventModel> eventModels;
 }

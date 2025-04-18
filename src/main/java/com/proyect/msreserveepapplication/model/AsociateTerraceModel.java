@@ -50,11 +50,8 @@ public class AsociateTerraceModel {
         return id;
     }
 
-    @OneToMany(mappedBy = "asociateTerraceModel", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    // FK - pointer
+    @OneToMany(mappedBy = "asociateTerrace", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY) // Evita loops infinitos en JSON
     private Set<TerraceModel> terraceModels;
-
-    @OneToMany(mappedBy = "asociateTerraceModel", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY) // Evita loops infinitos en JSON
-    private Set<EventModel> eventModels;
 }

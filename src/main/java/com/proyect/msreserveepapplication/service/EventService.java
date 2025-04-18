@@ -19,24 +19,20 @@ public class EventService {
     @Autowired
     private final EventRepo eventRepo;
 
-    @Autowired
-    private final ClientRepo clientRepo;
+    private ClientRepo clientRepo;
+
+    private TerraceRepo terraceRepo;
 
     @Autowired
-    private final TerraceRepo terraceRepo;
-
-    @Autowired
-    public EventService(EventRepo eventRepo, ClientRepo clientRepo, TerraceRepo terraceRepo) {
+    public EventService(EventRepo eventRepo) {
         this.eventRepo = eventRepo;
-        this.clientRepo = clientRepo;
-        this.terraceRepo = terraceRepo;
     }
 
-    public Page<EventModel> getAllEvents(Pageable pageable){
-        return eventRepo.findByKilled((byte) 0, pageable);
+    public Page<EventModel> findAll(Pageable pageable){
+        return eventRepo.findAll(pageable);
     }
 
-    public Optional<EventModel> getEventById(Integer id){
+    public Optional<EventModel> findById(Integer id){
         return eventRepo.findById(id);
     }
 
@@ -44,21 +40,21 @@ public class EventService {
         return eventRepo.save(eventModel);
     }
 
-    public Page<EventModel> getEventsByClientId(Integer clientId, Pageable pageable){
+    public Page<EventModel> findByClientId(Integer clientId, Pageable pageable){
         Optional<ClientModel> client = clientRepo.findById(clientId);
-        return client.map(clientModel -> getEventsByClient(clientModel, pageable)).orElse(null);
+        return client.map(clientModel -> findByClient(clientModel, pageable)).orElse(null);
     }
 
-    public Page<EventModel> getEventsByClient(ClientModel client, Pageable pageable){
+    public Page<EventModel> findByClient(ClientModel client, Pageable pageable){
         return eventRepo.findByClientModel(client,pageable);
     }
 
-    public Page<EventModel> getEventsByTerraceId(Integer terraceId, Pageable pageable){
+    public Page<EventModel> findByTerraceId(Integer terraceId, Pageable pageable){
         Optional<TerraceModel> terrace = terraceRepo.findById(terraceId);
-        return terrace.map(terraceModel -> getEventsByTerrace(terraceModel, pageable)).orElse(null);
+        return terrace.map(terraceModel -> findByTerrace(terraceModel, pageable)).orElse(null);
     }
 
-    public Page<EventModel> getEventsByTerrace(TerraceModel terrace, Pageable pageable){
+    public Page<EventModel> findByTerrace(TerraceModel terrace, Pageable pageable){
         return eventRepo.findByTerraceModel(terrace,pageable);
     }
 

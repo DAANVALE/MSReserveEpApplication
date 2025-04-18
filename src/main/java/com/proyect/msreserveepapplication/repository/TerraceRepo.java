@@ -11,6 +11,6 @@ import java.util.Optional;
 @Repository
 public interface TerraceRepo extends JpaRepository<TerraceModel, Integer> {
     Page<TerraceModel> findByKilled(Byte killed, Pageable pageable);
-    Page<ServiceModel> findByAsociate(AsociateTerraceModel asociate, Pageable pageable);
+    Page<TerraceModel> findByAsociateTerrace(AsociateTerraceModel asociate, Pageable pageable);
     Optional<TerraceModel> findById(Integer id);
 }

@@ -20,24 +20,20 @@ public class ReserveService {
     @Autowired
     private final ReserveRepo reserveRepo;
 
-    @Autowired
-    private final EventRepo eventModel;
+    private EventRepo eventModel;
+
+    private ServiceRepo serviceRepo;
 
     @Autowired
-    private final ServiceRepo serviceRepo;
-
-    @Autowired
-    public ReserveService(ReserveRepo reserveRepo, EventRepo eventModel, ServiceRepo serviceRepo) {
+    public ReserveService(ReserveRepo reserveRepo) {
         this.reserveRepo = reserveRepo;
-        this.eventModel = eventModel;
-        this.serviceRepo = serviceRepo;
     }
 
-    public Page<ReserveModel> getAllReserves(Pageable pageable){
-        return reserveRepo.findByKilled((byte) 0, pageable);
+    public Page<ReserveModel> findAll(Pageable pageable){
+        return reserveRepo.findAll(pageable);
     }
 
-    public Optional<ReserveModel> getReserveById(Integer id){
+    public Optional<ReserveModel> findById(Integer id){
         return reserveRepo.findById(id);
     }
 
@@ -61,6 +57,17 @@ public class ReserveService {
 
     public Page<ReserveModel> findByService(ServiceModel service, Pageable pageable){
         return reserveRepo.findByServiceModel(service, pageable);
+    }
+
+    public ReserveModel deleteReserve(ReserveModel reserveModel){
+        reserveRepo.delete(reserveModel);
+        return reserveModel;
+    }
+
+    public ReserveModel deleteReserveById(Integer id){
+        ReserveModel reserveModel = reserveRepo.findById(id).orElse(null);
+        deleteReserve(reserveModel);
+        return reserveModel;
     }
 
 }

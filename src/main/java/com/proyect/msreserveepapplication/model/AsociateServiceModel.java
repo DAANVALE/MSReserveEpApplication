@@ -51,7 +51,7 @@ public class AsociateServiceModel {
         return id;
     }
 
-    @OneToMany(mappedBy = "asociateServiceModel", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "asociateService", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY) // Evita loops infinitos en JSON
     private Set<ServiceModel> serviceModels;
 }
