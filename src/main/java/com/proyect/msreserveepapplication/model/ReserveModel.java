@@ -37,7 +37,15 @@ public class ReserveModel {
     @JsonProperty("stateReserveType")
     private StateReserveType stateReserveType;
 
-    @JsonProperty("dayDate")
-    @Column(name = "dayDate")
-    private String dayDate;
+    @JsonProperty("dayTime")
+    @Column(name = "dayTime")
+    private String dayTime;
+
+    @JsonProperty("sizePeople")
+    @Column(name = "sizePeople")
+    private Integer sizePeople;
+
+    @JsonProperty("finalPrice")
+    @Column(name = "finalPrice")
+    private Integer finalPrice;
 }

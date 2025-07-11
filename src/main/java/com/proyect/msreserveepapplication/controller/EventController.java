@@ -1,8 +1,13 @@
 package com.proyect.msreserveepapplication.controller;
 
 import com.proyect.msreserveepapplication.model.EventModel;
+
+import com.proyect.msreserveepapplication.model.TerraceModel;
 import com.proyect.msreserveepapplication.service.EventService;
-import org.apache.coyote.Response;
+import com.proyect.msreserveepapplication.service.ClientService;
+import com.proyect.msreserveepapplication.service.TerraceService;
+import com.proyect.msreserveepapplication.service.StateEventTypeService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -16,11 +21,24 @@ import java.util.Optional;
 public class EventController {
 
     @Autowired
-    EventService eventService;
+    private EventService eventService;
 
     @Autowired
-    public EventController(EventService eventService) {
+    private ClientService clientService;
+
+    @Autowired
+    private TerraceService terraceService;
+
+    @Autowired
+    private StateEventTypeService stateEventTypeService;
+
+    @Autowired
+    public EventController(EventService eventService, ClientService clientService,
+                           TerraceService terraceService, StateEventTypeService stateEventTypeService) {
         this.eventService = eventService;
+        this.clientService = clientService;
+        this.terraceService = terraceService;
+        this.stateEventTypeService = stateEventTypeService;
     }
 
     @GetMapping()
@@ -68,6 +86,24 @@ public class EventController {
 
     @PostMapping()
     public ResponseEntity<EventModel> save(@RequestBody EventModel model) {
+
+        if( !clientService.findById( model.getClientModel().getId() ).isPresent() ) {
+            return ResponseEntity.badRequest().body(null);
+        }
+
+        Optional<TerraceModel> terraceSelected = terraceService.findById( model.getTerraceModel().getId() );
+        if( !terraceSelected.isPresent() ) {
+            return ResponseEntity.badRequest().body(null);
+        }
+
+        if( !stateEventTypeService.findById( model.getStateEventType().getId() ).isPresent() ) {
+            return ResponseEntity.badRequest().body(null);
+        }
+
+        if(model.getSizePeople() > terraceSelected.get().getMaxSize()){
+            return ResponseEntity.badRequest().body(null);
+        }
+
         return ResponseEntity.ok(eventService.saveEvent(model));
     }
 

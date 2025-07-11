@@ -53,4 +53,11 @@ public class EventModel {
     @Column(name = "sumPrice")
     private BigDecimal sumPrice;
 
+    @JsonProperty("sumPeople")
+    @Column(name = "sumPeople")
+    private Integer sizePeople;
+
+    @JsonProperty("dayDate")
+    @Column(name = "dayDate")
+    private String dayDate;
 }
