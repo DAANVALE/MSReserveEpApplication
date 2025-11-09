@@ -36,8 +36,17 @@ public class EventService {
         return eventRepo.findById(id);
     }
 
-    public EventModel saveEvent(EventModel eventModel){
-        return eventRepo.save(eventModel);
+    public EventModel saveEvent(EventModel event){
+
+        if (event.getTerraceModel() != null && event.getTerraceModel().getDirection() != null) {
+            event.setAddress(event.getTerraceModel().getDirection());
+        }
+
+        if (event.getTerraceModel() == null && (event.getAddress() == null || event.getAddress().isBlank())) {
+            throw new IllegalArgumentException("It is required to have a Address");
+        }
+
+        return eventRepo.save(event);
     }
 
     public Page<EventModel> findByClientId(Integer clientId, Pageable pageable){

@@ -25,7 +25,7 @@ public class TerraceModel {
     private AsociateTerraceModel asociateTerrace;
 
     @JsonProperty("name")
-    @Column(name = "name", length = 30)
+    @Column(name = "name", length = 50)
     private String name;
 
     @JsonProperty("baseSize")
@@ -45,7 +45,7 @@ public class TerraceModel {
     private Integer priceAdd10;
 
     @JsonProperty("direction")
-    @Column(name = "direction", length = 50)
+    @Column(name = "direction", length = 100)
     private String direction;
 
     // isDeleted

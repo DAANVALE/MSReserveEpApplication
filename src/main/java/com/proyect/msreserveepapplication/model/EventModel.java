@@ -28,10 +28,14 @@ public class EventModel {
     @JsonProperty("clientModel")
     private ClientModel clientModel;
 
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
-    @JoinColumn(name = "terraceModel", nullable = false)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "terraceModel")
     @JsonProperty("terraceModel")
-    private TerraceModel terraceModel;
+    private TerraceModel terraceModel = null;
+
+    @JsonProperty("address")
+    @Column(name = "address")
+    private String address = null;
 
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     @JoinColumn(name = "stateEventType", nullable = false)

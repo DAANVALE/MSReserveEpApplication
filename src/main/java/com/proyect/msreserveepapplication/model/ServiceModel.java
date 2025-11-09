@@ -33,7 +33,7 @@ public class ServiceModel {
     private Set<ReserveModel> reserveModels;
 
     @JsonProperty("name")
-    @Column(name = "name", length = 30)
+    @Column(name = "name", length = 50)
     private String name;
 
     @JsonProperty("baseSize")
