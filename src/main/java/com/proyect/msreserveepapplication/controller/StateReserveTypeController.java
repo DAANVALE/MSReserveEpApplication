@@ -22,7 +22,7 @@ public class StateReserveTypeController {
         this.stateReserveTypeService = stateReserveTypeService;
     }
 
-    @GetMapping("/All")
+    @GetMapping("/all")
     public ResponseEntity<Page<StateReserveType>> findAll
             (
                     @RequestParam(defaultValue = "0") Integer page,

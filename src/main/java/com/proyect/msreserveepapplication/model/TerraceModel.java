@@ -16,7 +16,7 @@ import lombok.Setter;
 public class TerraceModel {
     @Id
     @JsonProperty("id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @ManyToOne(optional = false, fetch = FetchType.EAGER)

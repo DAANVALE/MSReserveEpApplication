@@ -23,7 +23,7 @@ public class StateEventTypeController {
         this.stateEventTypeService = stateEventTypeService;
     }
 
-    @GetMapping("/All")
+    @GetMapping("/all")
     public ResponseEntity<Page<StateEventType>> findAll
             (
                     @RequestParam(defaultValue = "0") Integer page,

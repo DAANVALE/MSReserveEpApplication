@@ -22,7 +22,7 @@ public class TerraceController {
         this.terraceService = terraceService;
     }
 
-    @GetMapping("/All")
+    @GetMapping("/all")
     public ResponseEntity<Page<TerraceModel>> findAll
             (
                     @RequestParam(defaultValue = "0") Integer page,
