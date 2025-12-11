@@ -1,5 +1,6 @@
 package com.proyect.msreserveepapplication.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -37,7 +38,8 @@ public class StateReserveType {
         return id;
     }
 
-    @OneToMany(mappedBy = "stateReserveType", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "stateReserveType")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY) // Evita loops infinitos en JSON
+    @JsonIgnore
     private Set<ReserveModel> reserveModels;
 }

@@ -1,5 +1,6 @@
 package com.proyect.msreserveepapplication.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -51,7 +52,8 @@ public class AsociateTerraceModel {
     }
 
     // FK - pointer
-    @OneToMany(mappedBy = "asociateTerrace", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "asociateTerrace")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY) // Evita loops infinitos en JSON
+    @JsonIgnore
     private Set<TerraceModel> terraceModels;
 }

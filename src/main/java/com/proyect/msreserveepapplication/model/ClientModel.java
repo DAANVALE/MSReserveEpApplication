@@ -1,5 +1,6 @@
 package com.proyect.msreserveepapplication.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -10,7 +11,7 @@ import lombok.Setter;
 import java.util.Set;
 
 @Entity
-@Table(name = "ClientModel")
+@Table(name = "clientModel")
 @NoArgsConstructor
 @AllArgsConstructor
 @Setter
@@ -50,7 +51,8 @@ public class ClientModel {
         return id;
     }
 
-    @OneToMany(mappedBy = "clientModel", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "clientModel")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY) // Evita loops infinitos en JSON
+    @JsonIgnore
     private Set<EventModel> eventModels;
 }

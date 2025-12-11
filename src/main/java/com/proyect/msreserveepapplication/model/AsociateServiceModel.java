@@ -1,5 +1,6 @@
 package com.proyect.msreserveepapplication.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -51,7 +52,8 @@ public class AsociateServiceModel {
         return id;
     }
 
-    @OneToMany(mappedBy = "asociateService", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "asociateService")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY) // Evita loops infinitos en JSON
+    @JsonIgnore
     private Set<ServiceModel> serviceModels;
 }
