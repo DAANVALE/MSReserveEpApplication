@@ -26,7 +26,7 @@ public class StateReserveTypeController {
     public ResponseEntity<Page<StateReserveType>> findAll
             (
                     @RequestParam(defaultValue = "0") Integer page,
-                    @RequestParam(defaultValue = "10") Integer size
+                    @RequestParam(defaultValue = "12") Integer size
             ) {
 
         Page<StateReserveType> stateReserveTypes = stateReserveTypeService.findAll(PageRequest.of(page, size));
@@ -38,7 +38,7 @@ public class StateReserveTypeController {
     public ResponseEntity<Page<StateReserveType>> findAllActive
             (
                     @RequestParam(defaultValue = "0") Integer page,
-                    @RequestParam(defaultValue = "10") Integer size
+                    @RequestParam(defaultValue = "12") Integer size
             ) {
 
         Page<StateReserveType> stateReserveTypes = stateReserveTypeService.findAllActive(PageRequest.of(page, size));
