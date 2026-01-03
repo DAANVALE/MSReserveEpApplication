@@ -33,6 +33,10 @@ public class AsociateServiceService {
         return asociateServiceRepo.findById(id);
     }
 
+    public Optional<AsociateServiceModel> findByIdUser(Integer id){
+        return asociateServiceRepo.findByIdUser(id);
+    }
+
     public AsociateServiceModel saveAsociateService(AsociateServiceModel asociateServiceModel){
         return asociateServiceRepo.save(asociateServiceModel);
     }

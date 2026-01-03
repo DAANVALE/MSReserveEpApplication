@@ -24,7 +24,7 @@ public class AsociateTerraceModel {
 
     @JsonProperty("idUser")
     @Column(name = "idUser")
-    private Integer IdUser;
+    private Integer idUser;
 
     @JsonProperty("name")
     @Column(name = "name", length = 30)

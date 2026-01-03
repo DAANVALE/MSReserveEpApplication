@@ -13,4 +13,5 @@ import java.util.Optional;
 public interface AsociateServiceRepo extends JpaRepository<AsociateServiceModel, Integer> {
     Page<AsociateServiceModel> findByKilled(Byte killed, Pageable pageable);
     Optional<AsociateServiceModel> findById(Integer id);
+    Optional<AsociateServiceModel> findByIdUser(Integer idUser);
 }

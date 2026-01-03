@@ -13,4 +13,5 @@ import java.util.Optional;
 public interface AsociateTerraceRepo extends JpaRepository<AsociateTerraceModel, Integer> {
     Page<AsociateTerraceModel> findByKilled(Byte killed, Pageable pageable);
     Optional<AsociateTerraceModel> findById(Integer id);
+    Optional<AsociateTerraceModel> findByIdUser(Integer idUser);
 }

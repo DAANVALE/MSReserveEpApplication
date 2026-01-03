@@ -54,8 +54,16 @@ public class AsociateTerraceController {
                     @PathVariable Integer id
             ) {
 
-        Optional<AsociateTerraceModel> asociate = asociateTerraceService.findById(id);
-        return ResponseEntity.ok(asociate.orElse(null));
+        Optional<AsociateTerraceModel> associate = asociateTerraceService.findByIdUser(id);
+        return ResponseEntity.ok(associate.orElse(null));
+    }
+
+    @GetMapping("/user/{id}")
+    public  ResponseEntity<AsociateTerraceModel> findByUserId(
+            @RequestParam Integer id
+    ){
+        Optional<AsociateTerraceModel> associate = asociateTerraceService.findById(id);
+        return ResponseEntity.ok(associate.orElse(null));
     }
 
     @PostMapping()

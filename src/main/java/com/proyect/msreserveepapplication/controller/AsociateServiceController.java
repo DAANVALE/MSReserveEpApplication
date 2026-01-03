@@ -56,6 +56,14 @@ public class AsociateServiceController {
         return ResponseEntity.ok(asociate.orElse(null));
     }
 
+    @GetMapping("/user/{id}")
+    public ResponseEntity<AsociateServiceModel> findByUserId(
+            @RequestParam Integer id
+    ){
+        Optional<AsociateServiceModel> asociate = asociateServiceService.findByIdUser(id);
+        return ResponseEntity.ok(asociate.orElse(null));
+    }
+
     @PostMapping()
     public ResponseEntity<AsociateServiceModel> save(@RequestBody AsociateServiceModel model) {
         return ResponseEntity.ok(asociateServiceService.saveAsociateService(model));

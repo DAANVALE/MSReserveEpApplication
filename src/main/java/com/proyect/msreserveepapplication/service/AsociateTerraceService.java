@@ -1,6 +1,5 @@
 package com.proyect.msreserveepapplication.service;
 
-import com.proyect.msreserveepapplication.model.AsociateServiceModel;
 import com.proyect.msreserveepapplication.model.AsociateTerraceModel;
 import com.proyect.msreserveepapplication.repository.AsociateServiceRepo;
 import com.proyect.msreserveepapplication.repository.AsociateTerraceRepo;
@@ -35,6 +34,10 @@ public class AsociateTerraceService {
 
     public Optional<AsociateTerraceModel> findById(Integer id){
         return asociateTerraceRepo.findById(id);
+    }
+
+    public Optional<AsociateTerraceModel> findByIdUser(Integer id){
+        return asociateTerraceRepo.findByIdUser(id);
     }
 
     public Optional<AsociateTerraceModel> findAsociateTerraceById(Integer id){
